@@ -1,0 +1,40 @@
+# Configuración para desarrollo local (H2)
+spring:
+  application:
+    name: chat-websocket
+
+  datasource:
+    url: jdbc:h2:mem:chatdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+# Para Azure SQL Server (comentar H2 y descomentar esta sección)
+# spring:
+#   datasource:
+#     url: jdbc:sqlserver://tu-servidor.database.windows.net:1433;database=chatdb
+#     username: tu-usuario
+#     password: tu-contraseña
+#     driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#
+#   jpa:
+#     database-platform: org.hibernate.dialect.SQLServerDialect
+#     hibernate:
+#       ddl-auto: update
+
+server:
+  port: 8080

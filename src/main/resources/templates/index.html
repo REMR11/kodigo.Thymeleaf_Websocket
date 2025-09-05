@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Universitario - Ingreso</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="login-page">
+<div class="container">
+    <div class="login-form">
+        <h1>🎓 Chat Universitario</h1>
+        <p class="subtitle">WebSockets + Spring Boot Demo</p>
+
+        <form action="/chat" method="get">
+            <div class="form-group">
+                <label for="usuario">Tu nombre:</label>
+                <input type="text"
+                       id="usuario"
+                       name="usuario"
+                       placeholder="Ingresa tu nombre"
+                       required
+                       maxlength="50">
+            </div>
+
+            <button type="submit" class="btn-primary">
+                🚀 Entrar al Chat
+            </button>
+        </form>
+
+        <!-- Mostrar error si existe -->
+        <div th:if="${param.error}" class="error-message">
+                <span th:if="${param.error[0]} == 'usuario_requerido'">
+                    ⚠️ El nombre de usuario es requerido
+                </span>
+        </div>
+
+        <div class="info-box">
+            <h3>💡 Sobre esta demo:</h3>
+            <ul>
+                <li>✅ Comunicación en tiempo real con WebSockets</li>
+                <li>✅ Persistencia de mensajes en base de datos</li>
+                <li>✅ Historial completo al unirse</li>
+                <li>✅ Listo para desplegar en Azure</li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

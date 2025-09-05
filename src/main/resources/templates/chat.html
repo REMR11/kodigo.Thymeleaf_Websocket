@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - Universidad</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="chat-page">
+<div class="chat-container">
+    <!-- Header del chat -->
+    <div class="chat-header">
+        <h2>💬 Chat en Tiempo Real</h2>
+        <div class="user-info">
+            <span class="user-badge" th:text="'👤 ' + ${usuario}"></span>
+            <a href="/" class="btn-logout">🚪 Salir</a>
+        </div>
+    </div>
+
+    <!-- Área de mensajes -->
+    <div class="chat-messages" id="messageArea">
+        <!-- Historial cargado desde la base de datos -->
+        <div th:each="mensaje : ${mensajes}" class="message-container">
+            <div class="message"
+                 th:classappend="${mensaje.usuario == usuario} ? 'own-message' : 'other-message'">
+                <div class="message-header">
+                    <span class="username" th:text="${mensaje.usuario}"></span>
+                    <span class="timestamp" th:text="${#temporals.format(mensaje.timestamp, 'HH:mm')}"></span>
+                </div>
+                <div class="message-content" th:text="${mensaje.contenido}"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Área de escritura -->
+    <div class="chat-input">
+        <form id="messageForm">
+            <div class="input-group">
+                <input type="text"
+                       id="messageInput"
+                       placeholder="Escribe tu mensaje..."
+                       maxlength="1000"
+                       autocomplete="off">
+                <button type="submit" id="sendButton">📤 Enviar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Indicador de estado de conexión -->
+    <div class="connection-status" id="connectionStatus">
+        <span class="status-indicator">🔴</span>
+        <span class="status-text">Conectando...</span>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script th:src="@{/js/chat.js}"></script>
+
+<!-- Pasar datos del servidor al JavaScript -->
+<script th:inline="javascript">
+    // Variable global con el nombre del usuario actual
+    window.currentUser = /*[[${usuario}]]*/ 'Usuario';
+</script>
+</body>
+</html>
