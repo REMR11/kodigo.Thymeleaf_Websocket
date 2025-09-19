@@ -36,23 +36,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    permissions:
-      id-token: write #This is required for requesting the JWT
-      contents: read #This is required for actions/checkout
-  
+      
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: java-app
       
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_5738EEBDD12C4F488770D5D95C117324 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_6C408E1FF6B248A284C96B003E0DAF0B }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_5747D28E3A6E4124B1DB2C08B4AA55E3 }}
-
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
@@ -60,4 +50,4 @@ jobs:
           app-name: 'kodichat'
           slot-name: 'Production'
           package: '*.jar'
-          
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8E7BA93EF236466B9BA10C6F278E0EE1 }}
