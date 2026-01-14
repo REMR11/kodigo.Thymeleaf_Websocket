@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy JAR app to Azure Web App - kodiChatJD23
+name: Build and deploy JAR app to Azure Web App - kodichat
 
 on:
   push:
@@ -49,15 +49,15 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_8A77534703AC4EB8939E4D44F0EA3AF9 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_E5C928AC75AF4765AA0B3CF47D7CCCA8 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_97CF4731B0DA4DD68D8B603FADB295F4 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_F30B8AB4D8AF4F35B725C5970696EB53 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_0C525BA5A2634CBCB0A2429834F54058 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_D0EAB66136A545D5BEE01070B38EAA90 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'kodiChatJD23'
+          app-name: 'kodichat'
           slot-name: 'Production'
           package: '*.jar'
           
